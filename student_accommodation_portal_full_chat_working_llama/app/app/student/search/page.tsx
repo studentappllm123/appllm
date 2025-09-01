@@ -10,10 +10,15 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Search, MapPin, Filter } from 'lucide-react';
 
+import { AccommodationDetailsDialog } from "@/components/accommodation-details-dialog";
+
 export default function StudentSearchPage() {
   const [searchResults, setSearchResults] = useState<any>({ accommodations: [], foodServices: [] });
   const [isLoading, setIsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isFilterExpanded, setIsFilterExpanded] = useState(true);
+  const [selectedAccommodation, setSelectedAccommodation] = useState<any>(null);
+  const [isDetailsDialogOpen, setIsDetailsDialogOpen] = useState(false);
   const [filters, setFilters] = useState({
     serviceType: 'BOTH',
     university: '',
@@ -34,6 +39,7 @@ export default function StudentSearchPage() {
 
   const handleSearch = async () => {
     setIsLoading(true);
+    setIsFilterExpanded(false); // Collapse filters when searching
     
     try {
       const results = { accommodations: [], foodServices: [] };
@@ -67,14 +73,16 @@ export default function StudentSearchPage() {
       }
 
       setSearchResults(results);
-    } catch (error) {
+      } catch (error) {
       console.error('Search error:', error);
     } finally {
       setIsLoading(false);
+      // Scroll to results after a short delay to ensure DOM updates
+      setTimeout(() => {
+        document.getElementById('searchResults')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
     }
-  };
-
-  const updateFilter = (key: string, value: any) => {
+  };  const updateFilter = (key: string, value: any) => {
     setFilters(prev => ({
       ...prev,
       [key]: value
@@ -111,13 +119,21 @@ export default function StudentSearchPage() {
           
         </div>
 
-        {/* Filters Panel - Always visible */}
+        {/* Filters Panel - Collapsible */}
           <Card className="mb-8 border-0 shadow-md">
-            <CardHeader>
-              <CardTitle className="text-lg">Search Filters</CardTitle>
-              <CardDescription>Refine your search results</CardDescription>
+            <CardHeader className="cursor-pointer flex flex-row items-center justify-between" onClick={() => setIsFilterExpanded(!isFilterExpanded)}>
+              <div>
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <Filter className="h-5 w-5" />
+                  Search Filters
+                </CardTitle>
+                <CardDescription>Refine your search results</CardDescription>
+              </div>
+              <Button variant="ghost" size="sm">
+                {isFilterExpanded ? '▼' : '▶'}
+              </Button>
             </CardHeader>
-            <CardContent>
+            <CardContent className={`overflow-hidden transition-all duration-300 ${isFilterExpanded ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {/* Service Type */}
                 <div>
@@ -256,9 +272,16 @@ export default function StudentSearchPage() {
           </Card>
 
         {/* Search Results */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div id="searchResults" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {searchResults.accommodations.map((accommodation: any) => (
-            <Card key={accommodation.id} className="border-0 shadow-md hover:shadow-lg transition-all duration-300">
+            <Card 
+              key={accommodation.id} 
+              className="border-0 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-[1.02]"
+              onClick={() => {
+                setSelectedAccommodation(accommodation);
+                setIsDetailsDialogOpen(true);
+              }}
+            >
               <CardHeader>
                 <CardTitle>{accommodation.propertyName}</CardTitle>
                 <CardDescription className="line-clamp-2">{accommodation.description}</CardDescription>
@@ -302,6 +325,13 @@ export default function StudentSearchPage() {
             </Card>
           ))}
         </div>
+
+        {/* Accommodation Details Dialog */}
+        <AccommodationDetailsDialog
+          isOpen={isDetailsDialogOpen}
+          onClose={() => setIsDetailsDialogOpen(false)}
+          accommodation={selectedAccommodation}
+        />
       </main>
     </div>
   );

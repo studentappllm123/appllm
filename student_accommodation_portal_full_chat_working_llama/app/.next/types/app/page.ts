@@ -1,4 +1,4 @@
-// File: D:\VM_IMAGES\student_accommodation_portal\student_accommodation_portal_full_chat_working_llama\app\app\page.tsx
+// File: D:\VM_IMAGES\appllm-main\appllm-main\student_accommodation_portal_full_chat_working_llama\app\app\page.tsx
 import * as entry from '../../../app/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

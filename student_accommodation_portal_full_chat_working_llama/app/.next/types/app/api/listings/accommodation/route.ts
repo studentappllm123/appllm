@@ -1,4 +1,4 @@
-// File: D:\VM_IMAGES\student_accommodation_portal\student_accommodation_portal_full_chat_working_llama\app\app\api\listings\accommodation\route.ts
+// File: D:\VM_IMAGES\appllm-main\appllm-main\student_accommodation_portal_full_chat_working_llama\app\app\api\listings\accommodation\route.ts
 import * as entry from '../../../../../../app/api/listings/accommodation/route.js'
 import type { NextRequest } from 'next/server.js'
 
