@@ -35,8 +35,6 @@ A **Next.js** web app and **chatbot powered by a Large Language Model (LLM)** de
 ### 🛠️ Installation
 
 1. 📥 Clone the repo:
-
-   ```bash
    git clone https://github.com/studentappllm/your-repo-name.git
    cd your-repo-name
 
@@ -44,9 +42,8 @@ A **Next.js** web app and **chatbot powered by a Large Language Model (LLM)** de
 npm --version
 
     ✅ Make sure Node.js and npm are installed.
-    📦 Download Node.js
+    📦 Download Node.js if needed.
 
-if needed.
 3. 📦 Install dependencies
 npm install
 
