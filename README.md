@@ -39,3 +39,22 @@ A **Next.js** web app and **chatbot powered by a Large Language Model (LLM)** de
    ```bash
    git clone https://github.com/studentappllm/your-repo-name.git
    cd your-repo-name
+
+2. 🧪 Check Node.js and npm versions node --version
+npm --version
+
+    ✅ Make sure Node.js and npm are installed.
+    📦 Download Node.js
+
+if needed.
+3. 📦 Install dependencies
+npm install
+
+4. 🛠️ (Optional) Use legacy peer dependencies if you face issues
+npm install --legacy-peer-deps
+
+5. ▶️ Start the development server
+   npm run dev
+🌐 Open your browser and go to http://localhost:3000 (or as shown in the terminal)
+
+
