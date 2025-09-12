@@ -1,4 +1,4 @@
-// File: D:\VM_IMAGES\appllm-main\appllm-main\student_accommodation_portal_full_chat_working_llama\app\app\layout.tsx
+// File: D:\VM_IMAGES\latest_project\appllm\student_accommodation_portal_full_chat_working_llama\app\app\layout.tsx
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
